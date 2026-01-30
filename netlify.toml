@@ -27,7 +27,18 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "geolocation=(), microphone=(), camera=()"
     Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://is1-ssl.mzstatic.com https://raw.githubusercontent.com https://api.somafm.com; font-src 'self' data: https://fonts.gstatic.com https://fonts.googleapis.com; connect-src 'self' https://api.weather.gov https://pokeapi.co https://api.somafm.com https://byucougars.com https://*.pinyon.dev https://long-wood-0764.email-884.workers.dev https://itunes.apple.com; media-src 'self' blob: https://*.pinyon.dev https://long-wood-0764.email-884.workers.dev; frame-ancestors 'none'; base-uri 'self'"
+    Content-Security-Policy = """
+  default-src 'self';
+  script-src 'self' https://static.cloudflareinsights.com;
+  style-src 'self' 'unsafe-inline';
+  img-src 'self' data:;
+  font-src 'self' data: https://fonts.gstatic.com https://fonts.googleapis.com;
+  connect-src 'self' https://api.weather.gov https://*.pinyon.dev;
+  media-src 'self' blob: https://*.pinyon.dev;
+  frame-src 'self' https://staticbaronwebapps.velocityweather.com;
+  frame-ancestors 'none';
+  base-uri 'self';
+"""
 
 
 
