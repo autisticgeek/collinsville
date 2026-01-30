@@ -1,0 +1,43 @@
+###############################################
+# SPA ROUTING
+###############################################
+
+# Let static assets pass through untouched
+[[redirects]]
+  from = "/assets/*"
+  to = "/assets/:splat"
+  status = 200
+
+# SPA fallback (all routes -> index.html)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+
+###############################################
+# GLOBAL SECURITY HEADERS
+###############################################
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://is1-ssl.mzstatic.com https://raw.githubusercontent.com https://api.somafm.com; font-src 'self' data: https://fonts.gstatic.com https://fonts.googleapis.com; connect-src 'self' https://api.weather.gov https://pokeapi.co https://api.somafm.com https://byucougars.com https://*.pinyon.dev https://long-wood-0764.email-884.workers.dev https://itunes.apple.com; media-src 'self' https://*.pinyon.dev https://long-wood-0764.email-884.workers.dev; frame-ancestors 'none'; base-uri 'self'"
+
+
+
+
+
+###############################################
+# ASSET CACHING
+###############################################
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
