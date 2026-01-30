@@ -1,3 +1,4 @@
+// src/components/VideoPlayer.jsx
 import React, { useEffect, useState } from "react";
 import { Typography, Button, Box } from "@mui/material";
 import { useHlsPlayer } from "../hooks/useHlsPlayer";

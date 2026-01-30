@@ -1,4 +1,4 @@
-import React from "react";
+// src/App.jsx
 import { Container, Stack } from "@mui/material";
 import AlabamaCams from "./modules/AlabamaCams";
 import WeatherMap from "./modules/WeatherMap";
@@ -8,6 +8,7 @@ export default function App() {
     <Container maxWidth="xl" sx={{ py: 3 }}>
       <Stack>
         <AlabamaCams />
+        <WeatherMap />
       </Stack>
     </Container>
   );
