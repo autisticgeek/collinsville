@@ -1,5 +1,5 @@
 // src/modules/AlabamaCams.jsx
-import { Box } from "@mui/material";
+import { Grid } from "@mui/material";
 import VideoPlayer from "../components/VideoPlayer";
 
 export default function AlabamaCams() {
@@ -21,25 +21,19 @@ export default function AlabamaCams() {
   ];
 
   return (
-    <Box
-      sx={{
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gap: 2,
-        mb: 5,
-      }}
-    >
+    <Grid container spacing={2}>
       {cams.map((cam) => (
-        <VideoPlayer
-          key={cam.id}
-          id={cam.id}
-          src={cam.src}
-          name={cam.name}
-          place={cam.place}
-          state={cam.state}
-          style={{ width: "100%", borderRadius: "8px" }}
-        />
+        <Grid key={cam.id} size={{ xs: 12, md: 6 }}>
+          <VideoPlayer
+            id={cam.id}
+            src={cam.src}
+            name={cam.name}
+            place={cam.place}
+            state={cam.state}
+            style={{ width: "100%", borderRadius: "8px" }}
+          />
+        </Grid>
       ))}
-    </Box>
+    </Grid>
   );
 }

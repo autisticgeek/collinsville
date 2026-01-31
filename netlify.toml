@@ -35,7 +35,7 @@
   font-src 'self' data: https://fonts.gstatic.com https://fonts.googleapis.com;
   connect-src 'self' https://api.weather.gov https://*.pinyon.dev;
   media-src 'self' blob: https://*.pinyon.dev;
-  frame-src 'self' https://staticbaronwebapps.velocityweather.com;
+  frame-src 'self' https://www.rainviewer.com;
   frame-ancestors 'none';
   base-uri 'self';
 """
