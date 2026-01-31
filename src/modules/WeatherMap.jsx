@@ -6,7 +6,7 @@ export default function WeatherMap() {
       {/* Overlay blocks ALL interaction but allows page scroll */}
 
       <iframe
-        src="https://www.rainviewer.com/map.html?loc=34.221,-85.847,10&o=1&c=1&layer=radar&sm=1&sn=1&animation=1&hideMenu=1&hideLegend=1&hideToolbar=1&focus=1&interactive=0"
+        src="https://www.rainviewer.com/map.html?loc=34.2215,-85.8407,10&oCS=1&c=3&o=83&lm=1&layer=radar&sm=1&sn=1"
         width="100%"
         height="100%"
         style={{ border: "none" }}

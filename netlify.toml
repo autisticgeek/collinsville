@@ -33,7 +33,7 @@
   style-src 'self' 'unsafe-inline';
   img-src 'self' data:;
   font-src 'self' data: https://fonts.gstatic.com https://fonts.googleapis.com;
-  connect-src 'self' https://api.weather.gov https://*.pinyon.dev;
+  connect-src 'self' https://api.weather.gov https://*.pinyon.dev https://long-wood-0764.email-884.workers.dev;
   media-src 'self' blob: https://*.pinyon.dev;
   frame-src 'self' https://www.rainviewer.com;
   frame-ancestors 'none';
