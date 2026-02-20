@@ -4,16 +4,21 @@ import Hls from "hls.js";
 
 export function useHlsPlayer(src, refreshKey) {
   const videoRef = useRef(null);
+  const hlsRef = useRef(null);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    let hls;
-
     if (Hls.isSupported()) {
-      hls = new Hls({
-        // Inject API key into EVERY request (playlist + segments)
+      const hls = new Hls({
+        autoStartLoad: false,   // IMPORTANT
+        maxBufferLength: 6,     // ~1 segment
+        maxMaxBufferLength: 6,
+        backBufferLength: 0,
+        liveSyncDuration: 6,
+        liveMaxLatencyDuration: 12,
+
         xhrSetup: (xhr) => {
           xhr.setRequestHeader(
             "x-autisticgeek-key",
@@ -22,22 +27,36 @@ export function useHlsPlayer(src, refreshKey) {
         },
       });
 
+      hlsRef.current = hls;
+
       hls.loadSource(src);
       hls.attachMedia(video);
+
+      // Load ONLY enough to show first frame
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        hls.startLoad(-1);
+
+        // Stop after short time so only 1 segment loads
+        setTimeout(() => {
+          hls.stopLoad();
+        }, 800);
+      });
 
       hls.on(Hls.Events.ERROR, (event, data) => {
         console.error("HLS error:", data);
       });
 
     } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-      // Safari native HLS
       video.src = src;
     }
 
     return () => {
-      if (hls) hls.destroy();
+      if (hlsRef.current) {
+        hlsRef.current.destroy();
+        hlsRef.current = null;
+      }
     };
   }, [src, refreshKey]);
 
-  return videoRef;
+  return { videoRef, hlsRef };
 }
