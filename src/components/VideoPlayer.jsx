@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Typography, Button, Box } from "@mui/material";
 import { useHlsPlayer } from "../hooks/useHlsPlayer";
+import { Temporal } from "@js-temporal/polyfill";
 
 const VideoPlayer = React.memo(function VideoPlayer({
   src,
@@ -14,14 +15,12 @@ const VideoPlayer = React.memo(function VideoPlayer({
   showButtons = true,
 }) {
   // console.log({ src, id, activeId, setActiveId, name, place });
-  const [refreshKey, setRefreshKey] = useState(Date.now());
+  const [refreshKey, setRefreshKey] = useState(Temporal.Now.instant());
 
   const videoRef = useHlsPlayer(
     `${import.meta.env.VITE_WORKER_URL}/hazcams?url=${encodeURIComponent(src)}`,
     refreshKey
   );
-
- 
 
   useEffect(() => {
     const video = videoRef.current;
@@ -59,7 +58,7 @@ const VideoPlayer = React.memo(function VideoPlayer({
       <video
         ref={videoRef}
         controls
-        autoPlay
+        // autoPlay
         muted={activeId !== id}
         style={style ? { ...style } : { width: "100%" }}
         referrerPolicy="no-referrer"
@@ -74,14 +73,16 @@ const VideoPlayer = React.memo(function VideoPlayer({
             marginTop: "8px",
           }}
         >
-         
           <Typography variant="h6">
             {name?.trim()}
             {place && ` — ${place.trim()}`}
             {state && `, ${state.trim()}`}
           </Typography>
 
-          <Button variant="contained" onClick={() => setRefreshKey(Date.now())}>
+          <Button
+            variant="contained"
+            onClick={() => setRefreshKey(Temporal.Now.instant())}
+          >
             Refresh
           </Button>
         </Box>
