@@ -12,11 +12,11 @@ export function useHlsPlayer(src, refreshKey) {
 
     if (Hls.isSupported()) {
       const hls = new Hls({
-        autoStartLoad: false,   // IMPORTANT
-        maxBufferLength: 6,     // ~1 segment
-        maxMaxBufferLength: 6,
-        backBufferLength: 0,
-        liveSyncDuration: 6,
+        autoStartLoad: false,     // IMPORTANT: do not start automatically
+        maxBufferLength: 12,      // maximum seconds to buffer ahead
+        maxMaxBufferLength: 12,
+        backBufferLength: 0,      // no extra back buffer
+        liveSyncDuration: 6,      // sync to ~1 segment
         liveMaxLatencyDuration: 12,
 
         xhrSetup: (xhr) => {
@@ -32,20 +32,29 @@ export function useHlsPlayer(src, refreshKey) {
       hls.loadSource(src);
       hls.attachMedia(video);
 
-      // Load ONLY enough to show first frame
+      // Step 1: start initial load immediately to show first frame
       hls.on(Hls.Events.MANIFEST_PARSED, () => {
-        hls.startLoad(-1);
+        hls.startLoad(-1); // fetch first segment
+      });
 
-        // Stop after short time so only 1 segment loads
-        setTimeout(() => {
-          hls.stopLoad();
-        }, 800);
+      // Step 2: keep one segment ahead, stop when buffered enough
+      hls.on(Hls.Events.FRAG_BUFFERED, () => {
+        if (!video) return;
+
+        const bufferedAhead = video.buffered.length
+          ? video.buffered.end(video.buffered.length - 1) - video.currentTime
+          : 0;
+
+        if (bufferedAhead < 12) {
+          hls.startLoad(); // fetch next segment
+        } else {
+          hls.stopLoad(); // stop after ~2 segments ahead
+        }
       });
 
       hls.on(Hls.Events.ERROR, (event, data) => {
         console.error("HLS error:", data);
       });
-
     } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
       video.src = src;
     }

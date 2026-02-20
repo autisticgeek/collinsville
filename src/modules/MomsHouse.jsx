@@ -62,7 +62,6 @@ export default function MomsHouse({ lat, lon }) {
   return (
     <Grid size={{ xs: 12, sm: 6 }}>
       <Stack height="100%" alignItems="center" justifyContent="center">
-        <Typography variant="h3">Pine Grove</Typography>
 
         <Typography gutterBottom variant="h4">
           Temperature: {weather.temperature}°F

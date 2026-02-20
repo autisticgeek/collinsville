@@ -21,13 +21,9 @@ const VideoPlayer = React.memo(function VideoPlayer({
     refreshKey
   );
 
-  /*
-   * ==============================
-   * LIVE BANDWIDTH CONTROL
-   * ==============================
-   * - Play  -> attach + startLoad at live edge
-   * - Pause -> stopLoad + detachMedia (ZERO network)
-   */
+  // -----------------------------
+  // Play / Pause control
+  // -----------------------------
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -36,14 +32,16 @@ const VideoPlayer = React.memo(function VideoPlayer({
       const hls = hlsRef.current;
       if (!hls) return;
 
-      hls.startLoad(-1); // resume live loading
+      // Resume live loading from live edge
+      hls.startLoad(-1);
     };
 
     const handlePause = () => {
       const hls = hlsRef.current;
       if (!hls) return;
 
-      hls.stopLoad(); // stop future segment loading
+      // Stop future segment downloads
+      hls.stopLoad();
     };
 
     video.addEventListener("play", handlePlay);
@@ -55,11 +53,9 @@ const VideoPlayer = React.memo(function VideoPlayer({
     };
   }, [videoRef, hlsRef]);
 
-  /*
-   * ==============================
-   * Stall Protection (Your Original Logic)
-   * ==============================
-   */
+  // -----------------------------
+  // Stall protection (your original logic)
+  // -----------------------------
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
