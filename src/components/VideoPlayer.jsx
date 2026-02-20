@@ -6,8 +6,6 @@ import { Temporal } from "@js-temporal/polyfill";
 
 const VideoPlayer = React.memo(function VideoPlayer({
   src,
-  id = null,
-  activeId = null,
   name = null,
   place = null,
   state = null,
@@ -94,8 +92,9 @@ const VideoPlayer = React.memo(function VideoPlayer({
     <Box sx={{ textAlign: "center" }}>
       <video
         ref={videoRef}
+        autoPlay
         controls
-        muted={activeId !== id}
+        muted={true}
         style={style ? { ...style } : { width: "100%" }}
         referrerPolicy="no-referrer"
       />
