@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import { LineChart } from "@mui/x-charts/LineChart";
 
-const Temporal = globalThis.Temporal;
+import { Temporal } from "@js-temporal/polyfill";
+globalThis.Temporal = Temporal;
 
 // Daytime weather icons
 const weatherIconsDay = {
@@ -209,7 +210,7 @@ export default function MomsHouse({ lat, lon }) {
       {tempsF.length > 0 && (
         <Grid size={{ xs: 12, sm: 6 }}>
           <LineChart
-          height={350}
+            height={350}
             grid={{ vertical: true, horizontal: true }}
             disableAxisListener
             xAxis={[

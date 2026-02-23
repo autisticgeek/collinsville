@@ -13,20 +13,13 @@ const theme = createTheme({
 });
 
 // Bootstrapping function
-(() => {
-  // Load Temporal polyfill only if needed
-  if (!globalThis.Temporal) {
-    const { Temporal } = import("@js-temporal/polyfill");
-    globalThis.Temporal = Temporal;
-  }
 
-  // Now mount your React app
-  createRoot(document.getElementById("root")).render(
-    <StrictMode>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <App />
-      </ThemeProvider>
-    </StrictMode>
-  );
-})();
+// Now mount your React app
+createRoot(document.getElementById("root")).render(
+  <StrictMode>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <App />
+    </ThemeProvider>
+  </StrictMode>
+);
