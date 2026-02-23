@@ -13,12 +13,12 @@ const theme = createTheme({
 });
 
 // Bootstrapping function
-(async () => {
-  // Load Temporal polyfill only if needed
-  if (!globalThis.Temporal) {
-    const { Temporal } = await import("@js-temporal/polyfill");
-    globalThis.Temporal = Temporal;
-  }
+if (!globalThis.Temporal) {
+  // Importing the polyfill synchronously ensures it's ready before React loads
+  const { Temporal } = require("@js-temporal/polyfill");
+  globalThis.Temporal = Temporal;
+}
+
 
   // Now mount your React app
   createRoot(document.getElementById("root")).render(
