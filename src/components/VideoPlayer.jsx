@@ -7,8 +7,6 @@ import { Temporal } from "@js-temporal/polyfill";
 const VideoPlayer = React.memo(function VideoPlayer({
   src,
   name = null,
-  place = null,
-  state = null,
   style = null,
   showButtons = true,
 }) {
@@ -111,8 +109,6 @@ const VideoPlayer = React.memo(function VideoPlayer({
         >
           <Typography variant="h6">
             {name?.trim()}
-            {place && ` — ${place.trim()}`}
-            {state && `, ${state.trim()}`}
           </Typography>
 
           <Button
