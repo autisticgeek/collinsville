@@ -26,9 +26,14 @@ export default function AlabamaCams() {
       state: "AL",
       src: "https://video.hazcams.com/gadsden-al-us-001/main_stream.m3u8",
     },
-   
+    {
+      id: "section",
+      name: "Section Hazcam",
+      place: "Section",
+      state: "AL",
+      src: "https://video.hazcams.com/section-al-us-001/main_stream.m3u8",
+    },
   ];
-
   return (
     <Grid container spacing={2}>
       <MomsHouse lat="34.222" lon="-85.848" />
