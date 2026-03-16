@@ -26,12 +26,18 @@ export default function AlabamaCams() {
       state: "AL",
       src: "https://video.hazcams.com/gadsden-al-us-001/main_stream.m3u8",
     },
+    {
+      id: "AWN",
+      name: "Alabama weather network",
+      place: null,
+      state: null,
+      src: "https://alabamaweathernetwork.com/?hlsproxy=1&url=https%3A%2F%2Falwxnet-ott-proxy.cloud9streaming.com%2Falwxnet%2Flive%2Fplaylist.m3u8",
+    },
   ];
 
   return (
     <Grid container spacing={2}>
-      
-        <MomsHouse lat="34.222" lon="-85.848" />
+      <MomsHouse lat="34.222" lon="-85.848" />
       {cams.map((cam) => (
         <Grid key={cam.id} size={{ xs: 12, sm: 6 }}>
           <VideoPlayer
@@ -44,7 +50,6 @@ export default function AlabamaCams() {
           />
         </Grid>
       ))}
-      
     </Grid>
   );
 }
