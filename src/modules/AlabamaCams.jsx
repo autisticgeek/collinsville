@@ -26,13 +26,7 @@ export default function AlabamaCams() {
       state: "AL",
       src: "https://video.hazcams.com/gadsden-al-us-001/main_stream.m3u8",
     },
-    {
-      id: "AWN",
-      name: "Alabama weather network",
-      place: null,
-      state: null,
-      src: "https://alabamaweathernetwork.com/?hlsproxy=1&url=https%3A%2F%2Falwxnet-ott-proxy.cloud9streaming.com%2Falwxnet%2Flive%2Fplaylist.m3u8",
-    },
+   
   ];
 
   return (
@@ -50,6 +44,16 @@ export default function AlabamaCams() {
           />
         </Grid>
       ))}
+      {/* <Grid>
+        <video
+          src="blob:https://collinsville.pinyon.dev/23770a22-1bd4-4efe-9be3-5c6a1412c101"
+          autoPlay
+          controls
+          muted={true}
+          //  style={style ? { ...style } : { width: "100%" }}
+          referrerPolicy="no-referrer"
+        />
+      </Grid> */}
     </Grid>
   );
 }
